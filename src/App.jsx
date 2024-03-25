@@ -1,35 +1,53 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from 'react';
 
-function App() {
-  const [count, setCount] = useState(0)
+import { LogoTwitter } from 'react-ionicons';
 
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+import './App.css';
+
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      text: 'Your quote is loading',
+      author: '',
+    };
+
+    this.getRandomQuote = this.getRandomQuote.bind(this);
+  }
+
+  getRandomQuote = async function () {
+    try {
+      const res = await fetch('https://api.quotable.io/random');
+      const quote = await res.json();
+      this.setState({
+        text: quote.content,
+        author: quote.author,
+      });
+    } catch (error) {
+      console.log(`Something went wrong: {error}`);
+    }
+  };
+
+  componentDidMount() {
+    this.getRandomQuote();
+  }
+
+  render() {
+    return (
+      <div id="quote-box">
+        <h1>Get your quote!</h1>
+        <div id="text">{this.state.text}</div>
+        <div id="author">{this.state.author}</div>
+        <button id="new-quote" onClick={this.getRandomQuote}>
+          New Quote
         </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+        <a href="https://twitter.com/intent/tweet" id="tweet-quote">
+          <LogoTwitter color="#1DA1F2" height="30px" width="30px" />
+        </a>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    );
+  }
 }
 
-export default App
+export default App;
