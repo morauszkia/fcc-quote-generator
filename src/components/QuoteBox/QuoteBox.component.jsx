@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-import { QuoteBoxDiv, QuoteBoxTitle } from './QuoteBox.styles';
+import { GetQuoteButton, QuoteBoxDiv, QuoteBoxTitle } from './QuoteBox.styles';
 import { LogoTwitter } from 'react-ionicons';
 import Quote from '../Quote/Quote.component';
 
@@ -27,9 +27,9 @@ const QuoteBox = () => {
     <QuoteBoxDiv id="quote-box">
       <QuoteBoxTitle>Get your quote!</QuoteBoxTitle>
       <Quote text={text} author={author} />
-      <button id="new-quote" onClick={getRandomQuote}>
+      <GetQuoteButton id="new-quote" onClick={getRandomQuote}>
         New Quote
-      </button>
+      </GetQuoteButton>
       <a
         href="https://twitter.com/intent/tweet"
         id="tweet-quote"
