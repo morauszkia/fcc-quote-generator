@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { GetQuoteButton, QuoteBoxDiv, QuoteBoxTitle } from './QuoteBox.styles';
 import { LogoTwitter } from 'react-ionicons';
 import Quote from '../Quote/Quote.component';
+import SocialLink from '../SocialLink/SocialLink.component';
 
 const QuoteBox = () => {
   const [text, setText] = useState('Your quote is loading');
@@ -30,13 +31,13 @@ const QuoteBox = () => {
       <GetQuoteButton id="new-quote" onClick={getRandomQuote}>
         New Quote
       </GetQuoteButton>
-      <a
+      <SocialLink
         href="https://twitter.com/intent/tweet"
         id="tweet-quote"
         data-text={`${text} ${author}`}
       >
         <LogoTwitter color="#1DA1F2" height="30px" width="30px" />
-      </a>
+      </SocialLink>
     </QuoteBoxDiv>
   );
 };
